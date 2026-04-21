@@ -43,14 +43,13 @@ public class Vetor {
     public boolean remover(int valor) {
         for (int i = 0; i < numElementos; i++){
             if (vetor[i] == valor){
-                vetor[i] = 0;
-                numElementos--;
-                for (int j = 0; j < tamanho - 1; j++) {
-                    if (vetor[j] == 0){
-                        vetor[j] = vetor[j + 1];
-                        vetor[j + 1] = 0;
-                    }
+                vetor[i] = null;
+                for (int j = i; j < numElementos - 1; j++) {
+                    vetor[j] = vetor[j + 1];
                 }
+                vetor[numElementos - 1] = null;
+                numElementos--;
+                return true;
             }
         }
         return false;
@@ -69,10 +68,9 @@ public class Vetor {
 
     // Insere na posição indicada, realocando os próximos; se cheio, dobra o tamanho
     public void inserirNaPosicao(int posicao, int valor) {
-        if (posicao > tamanho) {
+        if (posicao < 0 || posicao > tamanho){
             System.out.println("Posição inválida!");
-        }
-        if (numElementos == tamanho){
+        } else if (numElementos == tamanho){
             int novoTamanho = tamanho * 2;
             Integer[] novoVetor = new Integer[novoTamanho];
             for (int i = 0; i < tamanho; i++){
@@ -81,11 +79,11 @@ public class Vetor {
             vetor = novoVetor;
             tamanho = novoTamanho;
         }
-        vetor[posicao] = valor;
-        numElementos++;
-        for (int i = tamanho - 1; i > posicao; i--){
+        for (int i = numElementos; i > posicao; i--) {
             vetor[i] = vetor[i - 1];
         }
+        vetor[posicao] = valor;
+        numElementos++;
     }
 
     public int getNumElementos() { return numElementos; }
