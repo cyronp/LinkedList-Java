@@ -1,5 +1,7 @@
 public static void main(String[] args) {
 
+
+    // Usei IA para gerar os testes de vetor já que não continham no código original.
     Vetor v = new Vetor(3);
 
     // Teste de inserção simples
@@ -75,4 +77,9 @@ public static void main(String[] args) {
         System.out.print(atual.valor + " ");
         atual = atual.proximo;
     }
+    System.out.println();
+    System.out.println("Funções de get da lista");
+    System.out.println(lista.estaVazia());
+    System.out.println(lista.tamanho());
+    System.out.println(lista.buscar(25));
 }
